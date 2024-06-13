@@ -5,5 +5,5 @@
 - Fast and efficient.
 
 # To-do List
-- add real-time detect in gui program.
+- ~~add real-time detect in gui program.~~
 - add thread to main codes.
