@@ -30,6 +30,7 @@ class Line(QWidget):
         self.timer = None
         self.setWindowFlags(Qt.FramelessWindowHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
+        self.thetap = 0
         self.ui = uic.loadUi("compact1.ui", self)
         self.k = 0.1709
         self.acc = 0
@@ -331,15 +332,22 @@ class Line(QWidget):
             # # cv.imshow("img", img)
             # # cv.waitKey(0)
             # # cv.destroyAllWindows()
-            theta = 0
+            theta1 = 0
             # time.sleep(200)
             try:
-                theta = self.detect_theta(img)
+                theta1 = self.detect_theta(img)
                 # time.sleep(0.25)
             except:
-                print(theta)
-            self.angle.setValue(theta)
-            self.calculate(theta)
+                print(theta1)
+            if theta1 > 90:
+                self.thetap = 180 - theta1
+            else:
+                if theta1 == 0:
+                 print('维持上一次值')
+                else:
+                    self.thetap = theta1
+            self.angle.setValue(self.thetap)
+            self.calculate(self.thetap)
         for i in range(1000):
             x = int(((1 - exp(-self.k * i / 100)) * (
                     self.k * self.v * cos(self.theta) - self.acc) + self.acc * self.k * i / 100) / self.k ** 2)
