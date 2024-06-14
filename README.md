@@ -9,5 +9,5 @@
 - ~~set correction for counteracting angle.~~
 
 - add thread to main codes.
-- add distance modification when counteracted.
+- ~~add distance modification when counteracted.~~(no need)
 - ~~set global shortcut for pending calculation loops.~~
