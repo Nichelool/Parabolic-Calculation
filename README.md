@@ -10,4 +10,4 @@
 
 - add thread to main codes.
 - add distance modification when counteracted.
-- set global shortcut for pending calculation loops.
+- ~~set global shortcut for pending calculation loops.~~
