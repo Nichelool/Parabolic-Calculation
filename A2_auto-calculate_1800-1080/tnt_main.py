@@ -20,6 +20,7 @@ class Line(QWidget):
 
     def __init__(self):
         super().__init__()
+        self.solved = 1
         self.modifycurve = QCheckBox()
         self.strength = QSlider()
         self.shutcalloop = SystemHotkey()
@@ -94,6 +95,7 @@ class Line(QWidget):
             self.show()
 
     def sequence_contours(self, image, width, height):  # 在模板上分割图像
+        
         contours, hierarchy = cv.findContours(image, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
 
         n = len(contours)
@@ -145,6 +147,7 @@ class Line(QWidget):
 
     def detect_theta(self, pics):
         # 有缩放记得除以缩放比例
+
         pic_theta = cv.resize(pics, (int(3.6 * pics.shape[1]), int(3.6 * pics.shape[0])))
 
         # gray = cv.cvtColor(pic_theta, cv.COLOR_BGR2GRAY)  # 转成单通道的灰度图
@@ -230,8 +233,13 @@ class Line(QWidget):
         self.setWindowOpacity(self.transaction.value() / 100)
 
     def value_change_angle(self):
-        self.theta = self.angle.value() * pi / 180
-        self.label_angle.setText("Angle:  " + str(self.angle.value()) + "°")
+        if self.angle.value() < 90:
+            self.theta = self.angle.value() * pi / 180
+            self.label_angle.setText("Angle:  " + str(self.angle.value()) + "°")
+        else:
+            self.theta = (180-self.angle.value())* pi / 180
+            b = 180 - self.angle.value()
+            self.label_angle.setText("Angle:  " + str(self.angle.value()) + "°/"+str(b)+'°')
 
     def value_change_strength(self):
         self.v = self.strength.value()
@@ -285,7 +293,7 @@ class Line(QWidget):
         dis = abs(p1_p2_dis) / 67.5
         p1_p2_dis = abs(p1_p2_dis)
         self.distancelabel.setText("水平屏距:{:.3f}".format(dis))
-        print("你与敌方水平距离为{:.3f}".format(dis))
+        # print("你与敌方水平距离为{:.3f}".format(dis))
         y_dis = y_dis_before * cos(self.theta_rotate) - x_dis_before * sin(self.theta_rotate)
         k = 0.1709
         g = 216.6324
@@ -294,9 +302,11 @@ class Line(QWidget):
             v0 = p1_p2_dis * sqrt(g / (2 * cos(theta) * (p1_p2_dis * sin(theta) - y_dis * cos(theta))))
             result_v0 = opt.fsolve(solve_v, x0=v0, args=(p1_p2_dis, y_dis, theta, k, g))
             self.strength.setValue(int(result_v0[0]))
+            self.solved = 1
         except:
-            print("无解")
+            # print("无解")
             self.label_strength.setText("Strength:无解")
+            self.solved = 0
 
     def paintEvent(self, ev):
         p = win32api.GetCursorPos()
@@ -305,7 +315,7 @@ class Line(QWidget):
         painter = QPainter(self)
         painter.save()
         painter.setPen(QColor(255, 255, 255))
-        name = '大号'
+        name = '雷电模拟器'
         handle = win32gui.FindWindow(0, name)
         rect = None
 
@@ -313,8 +323,16 @@ class Line(QWidget):
         if handle:
             rect = win32gui.GetWindowRect(handle)
             self.strength.move(rect[0] - self.x() + 428, rect[1] - self.y() + 1045)
+            self.angle.move(rect[0] - self.x() + 428-11, rect[1] - self.y() + 1045-171)
+
+
+        # 如果不自动识别，开始自动选取角度（地图较亮或者0~100的角度无法识别时）
+        if (self.modifycurve.isChecked() == True) and (rect):
+            thetaq = self.theta * 180/pi
+            self.calculate(thetaq)
+
         # 如果自动识别，开始自动截图并识别角度计算力度,与的写法
-        if (self.opencurve.isChecked()) and (self.modifycurve.isChecked() == False) and (rect):
+        if (self.modifycurve.isChecked() == False) and (rect):
             # name = '大号'
             # handle = win32gui.FindWindow(0, name)
             # print(handle)
@@ -342,45 +360,53 @@ class Line(QWidget):
                     self.thetap = theta1
             self.angle.setValue(self.thetap)
             self.calculate(self.thetap)
-        for i in range(1000):
-            x = int(((1 - exp(-self.k * i / 100)) * (
-                    self.k * self.v * cos(self.theta) - self.acc) + self.acc * self.k * i / 100) / self.k ** 2)
-            y = int(((1 - exp(-self.k * i / 100)) * (
-                    self.k * self.v * sin(self.theta) + self.g) - self.g * self.k * i / 100) / self.k ** 2)
-            x /= self.zoom
-            y /= self.zoom
-            x_post_right = x * cos(self.theta_rotate) - y * sin(self.theta_rotate)
-            y_post_right = y * cos(self.theta_rotate) + x * sin(self.theta_rotate)
-            x_post_left = -x * cos(self.theta_rotate) - y * sin(self.theta_rotate)
-            y_post_left = y * cos(self.theta_rotate) - x * sin(self.theta_rotate)
-            x_right = self.delta_x + x_post_right
-            x_left = self.delta_x + x_post_left
-            y_right = self.delta_y - y_post_right
-            y_left = self.delta_y - y_post_left
-            painter.setPen(QColor(255, 255, 255))
-            painter.drawEllipse(
-                QPoint(self.strength.pos().x() + int(self.strength.sliderPosition() * 0.9+8), self.strength.pos().y()), 0.5, 32)
-            brush = QBrush(QColor(255, 125, 125))
-            painter.setPen(QColor(255, 255, 255))
-            painter.setBrush(brush)
-            if (x_right <= 831) & (x_right >= 30):
-                if (y_right <= 891) & (y_right >= 20):
-                    # painter.drawPoint(int(x_right), int(y_right))
-                    painter.drawEllipse(QPoint(int(x_right), int(y_right)), .7, .5)
-            # painter.setPen(QColor(255, 0, 0))
-            if (x_left <= 831) & (x_left >= 30):
-                if (y_left <= 891) & (y_left >= 20):
-                    # painter.drawPoint(int(x_left), int(y_left))
-                    painter.drawEllipse(QPoint(int(x_left), int(y_left)), .7, .5)
-            brush = QBrush(QColor(0, 125, 125))
-            painter.setBrush(brush)
-            painter.setPen(QColor(0, 125, 125))
-            painter.drawEllipse(QPoint(int(self.delta_x), int(self.delta_y)), 4, 4)
-            painter.setPen(QColor(255, 0, 0))
-            brush = QBrush(QColor(255, 0, 0))
-            painter.setBrush(brush)
-            painter.drawEllipse(QPoint(int(self.delta_x - self.my_pos_x + self.enemy_pos_x),
-                                       int(self.delta_y - self.my_pos_y + self.enemy_pos_y)), 4, 4)
+
+        painter.setPen(QColor(255, 255, 255))
+        painter.drawEllipse(
+            QPoint(self.strength.pos().x() + int(self.strength.sliderPosition() * 0.9 + 8), self.strength.pos().y()),
+            0.5, 32)
+        # 这一串是绘制抛物线，与上面的独立
+        if (self.opencurve.isChecked()):
+            for i in range(1000):
+                x = int(((1 - exp(-self.k * i / 100)) * (
+                        self.k * self.v * cos(self.theta) - self.acc) + self.acc * self.k * i / 100) / self.k ** 2)
+                y = int(((1 - exp(-self.k * i / 100)) * (
+                        self.k * self.v * sin(self.theta) + self.g) - self.g * self.k * i / 100) / self.k ** 2)
+                x /= self.zoom
+                y /= self.zoom
+                x_post_right = x * cos(self.theta_rotate) - y * sin(self.theta_rotate)
+                y_post_right = y * cos(self.theta_rotate) + x * sin(self.theta_rotate)
+                x_post_left = -x * cos(self.theta_rotate) - y * sin(self.theta_rotate)
+                y_post_left = y * cos(self.theta_rotate) - x * sin(self.theta_rotate)
+                x_right = self.delta_x + x_post_right
+                x_left = self.delta_x + x_post_left
+                y_right = self.delta_y - y_post_right
+                y_left = self.delta_y - y_post_left
+                if self.solved:
+                    brush = QBrush(QColor(255, 125, 125))
+                    painter.setPen(QColor(255, 255, 255))
+                else:
+                    brush = QBrush(QColor(255, 0, 0))
+                    painter.setPen(QColor(255, 0, 0))
+                painter.setBrush(brush)
+                if (x_right <= 831) & (x_right >= 30):
+                    if (y_right <= 891) & (y_right >= 20):
+                        # painter.drawPoint(int(x_right), int(y_right))
+                        painter.drawEllipse(QPoint(int(x_right), int(y_right)), .7, .5)
+                # painter.setPen(QColor(255, 0, 0))
+                if (x_left <= 831) & (x_left >= 30):
+                    if (y_left <= 891) & (y_left >= 20):
+                        # painter.drawPoint(int(x_left), int(y_left))
+                        painter.drawEllipse(QPoint(int(x_left), int(y_left)), .7, .5)
+                brush = QBrush(QColor(0, 125, 125))
+                painter.setBrush(brush)
+                painter.setPen(QColor(0, 125, 125))
+                painter.drawEllipse(QPoint(int(self.delta_x), int(self.delta_y)), 4, 4)
+                painter.setPen(QColor(255, 0, 0))
+                brush = QBrush(QColor(255, 0, 0))
+                painter.setBrush(brush)
+                painter.drawEllipse(QPoint(int(self.delta_x - self.my_pos_x + self.enemy_pos_x),
+                                           int(self.delta_y - self.my_pos_y + self.enemy_pos_y)), 4, 4)
 
         # painter.drawEllipse(2313, 733)
         painter.restore()
