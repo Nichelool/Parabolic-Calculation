@@ -7,7 +7,7 @@
 # To-do List
 - ~~add real-time detect in gui program.~~
 - ~~set correction for counteracting angle.~~
-- Manual modification for metrics.
+- manual modification for metrics.
 - add thread to main codes.
 - ~~add distance modification when counteracted.~~(no need)
 - ~~set global shortcut for pending calculation loops.~~
