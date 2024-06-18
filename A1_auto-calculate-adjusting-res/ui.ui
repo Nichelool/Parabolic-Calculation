@@ -66,44 +66,19 @@
     <number>100</number>
    </property>
   </widget>
-  <widget class="QLabel" name="label_strength">
-   <property name="geometry">
-    <rect>
-     <x>280</x>
-     <y>910</y>
-     <width>261</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Comic Sans MS</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(25, 76, 113);</string>
-   </property>
-   <property name="text">
-    <string>Strength</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-   </property>
-  </widget>
   <widget class="QLabel" name="mypos">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>1050</y>
+     <x>60</x>
+     <y>940</y>
      <width>101</width>
      <height>20</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>华光细圆_CNKI</family>
-     <pointsize>9</pointsize>
+     <family>微软雅黑</family>
+     <pointsize>6</pointsize>
      <kerning>true</kerning>
     </font>
    </property>
@@ -117,8 +92,8 @@
   <widget class="QLabel" name="origin">
    <property name="geometry">
     <rect>
-     <x>380</x>
-     <y>1050</y>
+     <x>360</x>
+     <y>940</y>
      <width>81</width>
      <height>18</height>
     </rect>
@@ -131,8 +106,8 @@
    </property>
    <property name="font">
     <font>
-     <family>华光细圆_CNKI</family>
-     <pointsize>9</pointsize>
+     <family>微软雅黑</family>
+     <pointsize>6</pointsize>
      <kerning>true</kerning>
     </font>
    </property>
@@ -146,8 +121,8 @@
   <widget class="QLabel" name="left">
    <property name="geometry">
     <rect>
-     <x>520</x>
-     <y>1050</y>
+     <x>510</x>
+     <y>940</y>
      <width>81</width>
      <height>18</height>
     </rect>
@@ -160,8 +135,8 @@
    </property>
    <property name="font">
     <font>
-     <family>华光细圆_CNKI</family>
-     <pointsize>9</pointsize>
+     <family>微软雅黑</family>
+     <pointsize>6</pointsize>
      <kerning>true</kerning>
     </font>
    </property>
@@ -175,8 +150,8 @@
   <widget class="QLabel" name="right">
    <property name="geometry">
     <rect>
-     <x>670</x>
-     <y>1050</y>
+     <x>650</x>
+     <y>940</y>
      <width>81</width>
      <height>18</height>
     </rect>
@@ -189,8 +164,9 @@
    </property>
    <property name="font">
     <font>
-     <family>华光细圆_CNKI</family>
-     <pointsize>9</pointsize>
+     <family>微软雅黑</family>
+     <pointsize>6</pointsize>
+     <bold>false</bold>
      <kerning>true</kerning>
     </font>
    </property>
@@ -201,129 +177,11 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QWidget" name="layoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>1070</y>
-     <width>731</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_2">
-    <item>
-     <widget class="QPushButton" name="MyPosbutton">
-      <property name="font">
-       <font>
-        <family>Arial</family>
-       </font>
-      </property>
-      <property name="focusPolicy">
-       <enum>Qt::StrongFocus</enum>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(25, 76, 113);
-color: rgb(255, 255, 255);</string>
-      </property>
-      <property name="text">
-       <string>MyPos</string>
-      </property>
-      <property name="shortcut">
-       <string>Z</string>
-      </property>
-      <property name="autoDefault">
-       <bool>false</bool>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="EnemyPosbutton">
-      <property name="font">
-       <font>
-        <family>Arial</family>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(25, 76, 113);
-color: rgb(255, 255, 255);</string>
-      </property>
-      <property name="text">
-       <string>EnemyPos</string>
-      </property>
-      <property name="shortcut">
-       <string>X</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="Originbutton">
-      <property name="font">
-       <font>
-        <family>Arial</family>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(25, 76, 113);
-color: rgb(255, 255, 255);</string>
-      </property>
-      <property name="text">
-       <string>Origin</string>
-      </property>
-      <property name="shortcut">
-       <string>`</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="Leftbutton">
-      <property name="font">
-       <font>
-        <family>Arial</family>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(25, 76, 113);
-color: rgb(255, 255, 255);</string>
-      </property>
-      <property name="text">
-       <string>Left</string>
-      </property>
-      <property name="shortcut">
-       <string>[</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="Rightbutton">
-      <property name="font">
-       <font>
-        <family>Arial</family>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(25, 76, 113);
-color: rgb(255, 255, 255);</string>
-      </property>
-      <property name="text">
-       <string>Right</string>
-      </property>
-      <property name="shortcut">
-       <string>]</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-   <zorder>Originbutton</zorder>
-   <zorder>MyPosbutton</zorder>
-   <zorder>Leftbutton</zorder>
-   <zorder>Rightbutton</zorder>
-   <zorder>EnemyPosbutton</zorder>
-  </widget>
   <widget class="QLabel" name="enemypos">
    <property name="geometry">
     <rect>
-     <x>220</x>
-     <y>1050</y>
+     <x>210</x>
+     <y>940</y>
      <width>101</width>
      <height>20</height>
     </rect>
@@ -336,8 +194,8 @@ color: rgb(255, 255, 255);</string>
    </property>
    <property name="font">
     <font>
-     <family>华光细圆_CNKI</family>
-     <pointsize>9</pointsize>
+     <family>微软雅黑</family>
+     <pointsize>6</pointsize>
      <kerning>true</kerning>
     </font>
    </property>
@@ -352,16 +210,16 @@ color: rgb(255, 255, 255);</string>
    <property name="geometry">
     <rect>
      <x>50</x>
-     <y>940</y>
+     <y>820</y>
      <width>191</width>
      <height>41</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Yu Gothic UI Semilight</family>
+     <family>微软雅黑</family>
      <pointsize>12</pointsize>
-     <bold>true</bold>
+     <bold>false</bold>
      <stylestrategy>PreferAntialias</stylestrategy>
      <kerning>true</kerning>
     </font>
@@ -383,46 +241,23 @@ color: rgb(255, 255, 255);</string>
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>1130</y>
-     <width>101</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>华光粗圆_CNKI</family>
-     <pointsize>9</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(28, 87, 129);</string>
-   </property>
-   <property name="text">
-    <string>透明度调整</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
   <widget class="QSlider" name="transaction">
    <property name="geometry">
     <rect>
-     <x>200</x>
-     <y>1130</y>
+     <x>600</x>
+     <y>10</y>
      <width>101</width>
      <height>22</height>
     </rect>
    </property>
+   <property name="minimum">
+    <number>2</number>
+   </property>
    <property name="maximum">
-    <number>100</number>
+    <number>70</number>
    </property>
    <property name="value">
-    <number>100</number>
+    <number>60</number>
    </property>
    <property name="orientation">
     <enum>Qt::Horizontal</enum>
@@ -432,10 +267,13 @@ background-color: rgb(28, 87, 129);</string>
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>20</y>
-     <width>801</width>
-     <height>871</height>
+     <y>10</y>
+     <width>751</width>
+     <height>781</height>
     </rect>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::StrongFocus</enum>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgba(129, 176, 210,60);
@@ -453,13 +291,13 @@ background-color: rgb(28, 87, 129);</string>
     <rect>
      <x>30</x>
      <y>0</y>
-     <width>801</width>
+     <width>751</width>
      <height>41</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>楷体</family>
+     <family>Comic Sans MS</family>
      <pointsize>12</pointsize>
     </font>
    </property>
@@ -468,41 +306,11 @@ background-color: rgb(28, 87, 129);</string>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(28, 87, 129);
-color: rgb(255, 255, 255);</string>
+color: rgb(255, 255, 255);
+border-radius:10px;</string>
    </property>
    <property name="text">
-    <string>菜鸟快乐挂</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_4">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>890</y>
-     <width>821</width>
-     <height>291</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>9</pointsize>
-     <kerning>true</kerning>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap>rect.png</pixmap>
-   </property>
-   <property name="scaledContents">
-    <bool>true</bool>
+    <string>Hola!</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -511,7 +319,7 @@ color: rgb(255, 255, 255);</string>
   <widget class="QPushButton" name="pushbutton_close">
    <property name="geometry">
     <rect>
-     <x>800</x>
+     <x>750</x>
      <y>10</y>
      <width>20</width>
      <height>20</height>
@@ -559,10 +367,10 @@ color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="anglelabel">
    <property name="geometry">
     <rect>
-     <x>500</x>
-     <y>1110</y>
-     <width>161</width>
-     <height>51</height>
+     <x>630</x>
+     <y>690</y>
+     <width>141</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="font">
@@ -572,7 +380,7 @@ color: rgb(255, 255, 255);</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: rgb(121, 121, 121);</string>
+    <string notr="true">color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
     <string>Tilit: 0</string>
@@ -581,10 +389,10 @@ color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="zoomlabel">
    <property name="geometry">
     <rect>
-     <x>690</x>
-     <y>1110</y>
-     <width>131</width>
-     <height>51</height>
+     <x>630</x>
+     <y>730</y>
+     <width>141</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="font">
@@ -594,51 +402,17 @@ color: rgb(255, 255, 255);</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: rgb(121, 121, 121);</string>
+    <string notr="true">color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
     <string>Zoom: 1</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_angle">
-   <property name="geometry">
-    <rect>
-     <x>280</x>
-     <y>970</y>
-     <width>261</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="sizePolicy">
-    <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
-   </property>
-   <property name="font">
-    <font>
-     <family>Comic Sans MS</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::LeftToRight</enum>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(25, 76, 113);</string>
-   </property>
-   <property name="text">
-    <string>Angle</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-   </property>
-  </widget>
   <widget class="QSpinBox" name="angle">
    <property name="geometry">
     <rect>
-     <x>330</x>
-     <y>1130</y>
+     <x>630</x>
+     <y>660</y>
      <width>71</width>
      <height>21</height>
     </rect>
@@ -658,11 +432,25 @@ color: rgb(255, 255, 255);</string>
    <property name="acceptDrops">
     <bool>false</bool>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(25, 76, 113);
+color:rgb(255, 255, 255);
+border-radius:8px;</string>
+   </property>
    <property name="inputMethodHints">
     <set>Qt::ImhFormattedNumbersOnly</set>
    </property>
+   <property name="wrapping">
+    <bool>false</bool>
+   </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
+   </property>
+   <property name="readOnly">
+    <bool>false</bool>
+   </property>
+   <property name="buttonSymbols">
+    <enum>QAbstractSpinBox::NoButtons</enum>
    </property>
    <property name="suffix">
     <string>°</string>
@@ -673,6 +461,9 @@ color: rgb(255, 255, 255);</string>
    <property name="maximum">
     <number>180</number>
    </property>
+   <property name="stepType">
+    <enum>QAbstractSpinBox::DefaultStepType</enum>
+   </property>
    <property name="value">
     <number>50</number>
    </property>
@@ -681,7 +472,7 @@ color: rgb(255, 255, 255);</string>
    <property name="geometry">
     <rect>
      <x>560</x>
-     <y>910</y>
+     <y>790</y>
      <width>191</width>
      <height>121</height>
     </rect>
@@ -691,7 +482,7 @@ color: rgb(255, 255, 255);</string>
      <widget class="QCheckBox" name="opencurve">
       <property name="font">
        <font>
-        <family>MS Reference Sans Serif</family>
+        <family>微软雅黑</family>
         <pointsize>9</pointsize>
        </font>
       </property>
@@ -712,7 +503,7 @@ color: rgb(0, 0, 0);
      <widget class="QCheckBox" name="modifycurve">
       <property name="font">
        <font>
-        <family>MS Reference Sans Serif</family>
+        <family>微软雅黑</family>
         <pointsize>9</pointsize>
        </font>
       </property>
@@ -736,7 +527,7 @@ color: rgb(0, 0, 0);
      <widget class="QCheckBox" name="onTop">
       <property name="font">
        <font>
-        <family>MS Reference Sans Serif</family>
+        <family>微软雅黑</family>
         <pointsize>9</pointsize>
        </font>
       </property>
@@ -750,11 +541,306 @@ color: rgb(0, 0, 0);
     </item>
    </layout>
   </widget>
-  <zorder>label_4</zorder>
-  <zorder>layoutWidget</zorder>
+  <widget class="QPushButton" name="Rightbutton">
+   <property name="geometry">
+    <rect>
+     <x>622</x>
+     <y>960</y>
+     <width>137</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(25, 76, 113);
+color: rgb(255, 255, 255);
+border-radius:11px;</string>
+   </property>
+   <property name="text">
+    <string>Right</string>
+   </property>
+   <property name="shortcut">
+    <string>]</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Originbutton">
+   <property name="geometry">
+    <rect>
+     <x>336</x>
+     <y>960</y>
+     <width>137</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(25, 76, 113);
+color: rgb(255, 255, 255);
+border-radius:11px;</string>
+   </property>
+   <property name="text">
+    <string>Origin</string>
+   </property>
+   <property name="shortcut">
+    <string>`</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="MyPosbutton">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>960</y>
+     <width>137</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+    </font>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::StrongFocus</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(25, 76, 113);
+color: rgb(255, 255, 255);
+border-radius:11px;</string>
+   </property>
+   <property name="text">
+    <string>MyPos</string>
+   </property>
+   <property name="shortcut">
+    <string>Z</string>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Leftbutton">
+   <property name="geometry">
+    <rect>
+     <x>479</x>
+     <y>960</y>
+     <width>137</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(25, 76, 113);
+color: rgb(255, 255, 255);
+border-radius:11px;</string>
+   </property>
+   <property name="text">
+    <string>Left</string>
+   </property>
+   <property name="shortcut">
+    <string>[</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="EnemyPosbutton">
+   <property name="geometry">
+    <rect>
+     <x>193</x>
+     <y>960</y>
+     <width>137</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(25, 76, 113);
+color: rgb(255, 255, 255);
+border-radius:11px;</string>
+   </property>
+   <property name="text">
+    <string>EnemyPos</string>
+   </property>
+   <property name="shortcut">
+    <string>X</string>
+   </property>
+  </widget>
+  <widget class="QFrame" name="frame">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>770</y>
+     <width>751</width>
+     <height>241</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:rgb(255, 255, 255);
+border-radius:10px;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>20</y>
+      <width>231</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <widget class="QLabel" name="label_strength">
+       <property name="font">
+        <font>
+         <family>Comic Sans MS</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(25, 76, 113);</string>
+       </property>
+       <property name="text">
+        <string>Strength</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_strength_bigger">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Comic Sans MS</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(209, 76, 0);</string>
+       </property>
+       <property name="text">
+        <string>Bigger</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_angle">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Comic Sans MS</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(25, 76, 113);</string>
+       </property>
+       <property name="text">
+        <string>Angle</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+    <zorder>label_strength_bigger</zorder>
+    <zorder>label_angle</zorder>
+    <zorder>label_strength</zorder>
+   </widget>
+   <widget class="QFrame" name="frame_2">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>20</y>
+      <width>221</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color:rgba(214, 225, 233,90);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="pushButton_4">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>10</y>
+     <width>20</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>OnTopReplica</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_5">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>10</y>
+     <width>20</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Game</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
   <zorder>label_3</zorder>
+  <zorder>frame</zorder>
   <zorder>strength</zorder>
-  <zorder>label_strength</zorder>
   <zorder>mypos</zorder>
   <zorder>origin</zorder>
   <zorder>left</zorder>
@@ -762,20 +848,22 @@ color: rgb(0, 0, 0);
   <zorder>layoutWidget</zorder>
   <zorder>enemypos</zorder>
   <zorder>distancelabel</zorder>
-  <zorder>label</zorder>
-  <zorder>transaction</zorder>
   <zorder>label_2</zorder>
   <zorder>pushbutton_close</zorder>
   <zorder>pushButton_2</zorder>
   <zorder>pushbutton_mini</zorder>
   <zorder>anglelabel</zorder>
   <zorder>zoomlabel</zorder>
-  <zorder>label_angle</zorder>
   <zorder>angle</zorder>
+  <zorder>Rightbutton</zorder>
+  <zorder>Originbutton</zorder>
+  <zorder>MyPosbutton</zorder>
+  <zorder>Leftbutton</zorder>
+  <zorder>EnemyPosbutton</zorder>
+  <zorder>transaction</zorder>
+  <zorder>pushButton_4</zorder>
+  <zorder>pushButton_5</zorder>
  </widget>
- <resources>
-  <include location="BgTest.qrc"/>
-  <include location="BgTest.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

@@ -1,16 +1,22 @@
 import sys
 from system_hotkey import SystemHotkey
+
+import win32con
+import win32gui
 import win32api
+import pyautogui
+
+
 from math import sin, cos, sqrt, log, tan, exp, atan, pi
 import numpy as np
-import win32gui
-import cv2 as cv
-import pyautogui
 import scipy.optimize as opt
+
+import cv2 as cv
+
 from PyQt5 import uic
 from PyQt5.QtCore import Qt, QTimer, QPoint, pyqtSignal, QSize
-from PyQt5.QtGui import QPainter, QColor, QCursor, QPen, QBrush
-from PyQt5.QtWidgets import QWidget, QApplication, QDesktopWidget, QCheckBox, QSlider, QLabel
+from PyQt5.QtGui import QPainter, QColor, QCursor, QPen, QBrush, QPalette
+from PyQt5.QtWidgets import QWidget, QApplication, QDesktopWidget, QCheckBox, QSlider, QLabel, QLineEdit, QSpinBox
 
 
 # from qtpy import QtCore
@@ -19,10 +25,13 @@ class Line(QWidget):
 
     def __init__(self):
         super().__init__()
+        self.strength_bigger = 300
         self.solved = 1
         self.modifycurve = QCheckBox()
         self.strength = QSlider()
-        self.res_zoom = 1800 / 1800
+        # 重要用户接口，设置分辨率，之后再留出。
+        self.res_zoom = 1000 / 1800
+        # self.res_zoom = 1800 / 1800
         self.shutcalloop = SystemHotkey()
         self.shutcalloop.register(('shift', 'c'), callback=lambda x: self.shutloop())
 
@@ -35,7 +44,7 @@ class Line(QWidget):
         self.setAttribute(Qt.WA_TranslucentBackground)
         self.thetap = 0
         # self.ui = uic.loadUi("620_1080.ui", self)
-        self.ui = uic.loadUi("compact1.ui", self)
+        self.ui = uic.loadUi("ui.ui", self)
         self.k = 0.1709
         self.acc = 0
         self.theta = 45 * pi / 180
@@ -52,12 +61,28 @@ class Line(QWidget):
         self.pushbutton_close.setStyleSheet("QPushButton{background:#F76677;border-radius:10px;}\n        "
                                             "QPushButton:hover{background:red;}")
         self.pushButton_2.setStyleSheet("QPushButton{background:#F7D674;border-radius:10px;}\n        "
-                                        "QPushButton:hover{background:yellow;}")
+                                        "QPushButton:hover{background:#9C780C;}")
+
+        self.pushButton_4.setStyleSheet("QPushButton{background:#c78bc8;border-radius:5px;}\n        "
+                                        "QPushButton:hover{background:#7B4C7C;}")
+
+        self.pushButton_5.setStyleSheet("QPushButton{background:#F37732;border-radius:5px;}\n        "
+                                        "QPushButton:hover{background:#99552F;}")
+
         self.pushbutton_mini.setStyleSheet("QPushButton{background:#6DDF6D;border-radius:10px;}\n        "
                                            "QPushButton:hover{background:green;}")
+
         self.pushbutton_close.clicked.connect(self.close)
         self.pushbutton_mini.clicked.connect(self.showMinimized)
-        self.label_4.lower()
+        self.pushButton_4.clicked.connect(self.OnTopReplica)
+        self.pushButton_5.clicked.connect(self.GameMinRestore)
+
+
+        self.angle.setStyleSheet("QSpinBox{background-color: rgb(25, 76, 113);color:rgb(255, 255, "
+                                 "255);border-radius:8px;}"
+                                 "QSpinBox::hover{background-color:#d38052;}")
+        # self.label_4.lower()
+
 
     def shutloop(self):
         self.modifycurve.toggle()
@@ -234,7 +259,26 @@ class Line(QWidget):
         self.setCursor(QCursor(Qt.ArrowCursor))
 
     def value_change_transaction(self):
-        self.setWindowOpacity(self.transaction.value() / 100)
+        self.label_3.setStyleSheet('background-color: rgba(129, 176, 210, ' + str(self.transaction.value()) + ');')
+        # self.setWindowOpacity(self.transaction.value() / 100)
+
+    def OnTopReplica(self):
+        name = 'OnTopReplica'
+        handle = win32gui.FindWindow(0, name)
+        if handle:
+            win32gui.MoveWindow(handle, self.x() + 20, self.y() + 30, 753, 753, True)
+
+    def GameMinRestore(self):
+        name = '雷电模拟器'
+        handle = win32gui.FindWindow(0, name)
+        # 检查句柄窗口起点位置来最大最小化-冻结小地图并框选尺寸用。
+        if handle:
+            rect = win32gui.GetWindowRect(handle)
+            judge = rect[0]
+            if judge:
+                win32gui.SendMessage(handle, win32con.WM_SYSCOMMAND, win32con.SC_MINIMIZE, 0)
+            if judge < 0:
+                win32gui.SendMessage(handle, win32con.WM_SYSCOMMAND, win32con.SC_RESTORE, 0)
 
     def value_change_angle(self):
         if self.angle.value() < 90:
@@ -293,12 +337,18 @@ class Line(QWidget):
 
         x_dis_before = self.zoom * (self.enemy_pos_x - self.my_pos_x)
         y_dis_before = self.zoom * (self.my_pos_y - self.enemy_pos_y)
+        x_dis_before_half = x_dis_before / 2
+        y_dis_before_half = y_dis_before / 2
         p1_p2_dis = x_dis_before * cos(self.theta_rotate) + y_dis_before * sin(self.theta_rotate)
+        p1_p2_dis_half = x_dis_before_half * cos(self.theta_rotate) + y_dis_before_half * sin(self.theta_rotate)
         dis = abs(p1_p2_dis) / 67.5
+        # dis_half = abs(p1_p2_dis_half) / 67.5
         p1_p2_dis = abs(p1_p2_dis)
+        p1_p2_dis_half = abs(p1_p2_dis_half)
         self.distancelabel.setText("水平屏距:{:.3f}".format(dis))
         # print("你与敌方水平距离为{:.3f}".format(dis))
         y_dis = y_dis_before * cos(self.theta_rotate) - x_dis_before * sin(self.theta_rotate)
+        y_dis_half = y_dis_before_half * cos(self.theta_rotate) - x_dis_before_half * sin(self.theta_rotate)
         k = 0.1709
         g = 216.6324
 
@@ -311,6 +361,16 @@ class Line(QWidget):
             # print("无解")
             self.label_strength.setText("Strength:无解")
             self.solved = 0
+
+        try:
+            v0 = p1_p2_dis_half * sqrt(g / (2 * cos(theta) * (p1_p2_dis_half * sin(theta) - y_dis_half * cos(theta))))
+            result_v1 = opt.fsolve(solve_v, x0=v0, args=(p1_p2_dis_half, y_dis_half, theta, k, g))
+            self.strength_bigger = int(result_v1[0])
+            self.label_strength_bigger.setText("Bigger:  " + str(int(result_v1[0]) / 10) + "度")
+
+        except:
+            print("无解")
+            # self.label_strength.setText("Strength:无解")
 
     def paintEvent(self, ev):
         p = win32api.GetCursorPos()
@@ -352,8 +412,8 @@ class Line(QWidget):
             # rect = win32gui.GetWindowRect(handle)
             # TODO: 4 研究截图缩放比√
             img = pyautogui.screenshot(region=(
-            rect[0] + int(183 * self.res_zoom), rect[1] + 35 + int(840 * self.res_zoom), int(87 * self.res_zoom),
-            int(41 * self.res_zoom)))
+                rect[0] + int(183 * self.res_zoom), rect[1] + 35 + int(840 * self.res_zoom), int(87 * self.res_zoom),
+                int(41 * self.res_zoom)))
             image_array = np.array(img)
             img = cv.cvtColor(image_array, cv.COLOR_BGR2GRAY)
             # # cv.imshow("img", img)
@@ -376,12 +436,21 @@ class Line(QWidget):
             self.angle.setValue(self.thetap)
             self.calculate(self.thetap)
 
-        painter.setPen(QColor(255, 255, 255))
         # TODO: 5 力度条角度调的位置调整√
+        # TODO: 6 大小状态力度条标识
+        # 原始力度
+        painter.setPen(QColor(255, 255, 255))
         painter.drawEllipse(
             QPoint(self.strength.pos().x() + int(self.strength.sliderPosition() * 0.9 * self.res_zoom + 8),
                    self.strength.pos().y()),
             0.5, int(32 * self.res_zoom))
+
+        # # 简单缩放力度
+        painter.setPen(QColor(251, 240, 127))
+        painter.drawEllipse(
+            QPoint(self.strength.pos().x() + int(self.strength_bigger * 0.9 * self.res_zoom + 8),
+                   self.strength.pos().y() - 5),
+            0.5, int(32 * self.res_zoom) - 3)
         # 这一串是绘制抛物线，与上面的独立
         if self.opencurve.isChecked():
             for k in range(1000):
